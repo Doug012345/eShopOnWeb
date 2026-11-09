@@ -5,7 +5,7 @@ on: [push, workflow_dispatch]
 env:
   RESOURCE-GROUP: rg-eshoponweb
   LOCATION: eastus
-  TEMPLATE-FILE: main.bicep
+  TEMPLATE-FILE: infra/main.bicep
   SUBSCRIPTION-ID: 1a24439d-e847-4eee-8d37-f9387d37d991
   WEBAPP-NAME: eshoponweb-webapp-doug012345
 
@@ -64,7 +64,7 @@ jobs:
         with:
           subscriptionId: ${{ env.SUBSCRIPTION-ID }}
           resourceGroupName: ${{ env.RESOURCE-GROUP }}
-          template: main.bicep
+          template: infra/main.bicep
           parameters: environmentName=dev location=${{ env.LOCATION }} webServiceName=${{ env.WEBAPP-NAME }} sqlAdminPassword=${{ secrets.SQL_ADMIN_PASSWORD }} appUserPassword=${{ secrets.APP_USER_PASSWORD }}
           failOnStdErr: false
 
