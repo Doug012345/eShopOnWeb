@@ -4,8 +4,8 @@ on: [push, workflow_dispatch]
 
 env:
   RESOURCE-GROUP: rg-eshoponweb
-  LOCATION: eastus
-  TEMPLATE-FILE: infra/main.bicep
+  LOCATION: canadacentral
+  TEMPLATE-FILE: infra/webapp.bicep
   SUBSCRIPTION-ID: 1a24439d-e847-4eee-8d37-f9387d37d991
   WEBAPP-NAME: eshoponweb-webapp-doug012345
 
@@ -14,30 +14,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "8.0.x"
-          dotnet-quality: "preview"
-          
+
       - name: Build with dotnet
         run: dotnet build ./eShopOnWeb.sln --configuration Release
-        
+
       - name: Test with dotnet
         run: dotnet test ./eShopOnWeb.sln --configuration Release
-        
+
       - name: dotnet publish
         run: |
-          dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
-          cd ${{env.DOTNET_ROOT}}/myapp
+          dotnet publish ./src/Web/Web.csproj -c Release -o ${{ env.DOTNET_ROOT }}/myapp
+          cd ${{ env.DOTNET_ROOT }}/myapp
           zip -r ../app.zip .
-          
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/app.zip
+          path: ${{ env.DOTNET_ROOT }}/app.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,7 +44,6 @@ jobs:
     environment:
       name: "Development"
     steps:
-      # Checkout du code pour récupérer l'intégralité des fichiers Bicep et modules
       - uses: actions/checkout@v5
 
       - name: Download artifact from build job
@@ -64,8 +62,8 @@ jobs:
         with:
           subscriptionId: ${{ env.SUBSCRIPTION-ID }}
           resourceGroupName: ${{ env.RESOURCE-GROUP }}
-          template: ${{ github.workspace }}/infra/main.bicep
-          parameters: environmentName=dev location=${{ env.LOCATION }} webServiceName=${{ env.WEBAPP-NAME }} sqlAdminPassword=${{ secrets.SQL_ADMIN_PASSWORD }} appUserPassword=${{ secrets.APP_USER_PASSWORD }}
+          template: ${{ env.TEMPLATE-FILE }}
+          parameters: "webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }} sku=F1"
           failOnStdErr: false
 
       - name: Publish Website to WebApp using CLI
