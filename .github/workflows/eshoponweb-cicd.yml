@@ -64,7 +64,7 @@ jobs:
         with:
           subscriptionId: ${{ env.SUBSCRIPTION-ID }}
           resourceGroupName: ${{ env.RESOURCE-GROUP }}
-          template: infra/main.bicep
+          template: ${{ github.workspace }}/infra/main.bicep
           parameters: environmentName=dev location=${{ env.LOCATION }} webServiceName=${{ env.WEBAPP-NAME }} sqlAdminPassword=${{ secrets.SQL_ADMIN_PASSWORD }} appUserPassword=${{ secrets.APP_USER_PASSWORD }}
           failOnStdErr: false
 
