@@ -3,8 +3,8 @@ name: eShopOnWeb Build and Test
 on: [push, workflow_dispatch]
 
 env:
-  RESOURCE-GROUP: rg-eshoponweb
-  LOCATION: canadacentral
+  RESOURCE-GROUP: rg-eshoponweb          # doit être le groupe créé dans Cloud Shell (portée du principal de service)
+  LOCATION: eastus
   TEMPLATE-FILE: infra/webapp.bicep
   SUBSCRIPTION-ID: 1a24439d-e847-4eee-8d37-f9387d37d991
   WEBAPP-NAME: eshoponweb-webapp-doug012345
