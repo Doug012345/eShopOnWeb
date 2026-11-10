@@ -4,14 +4,18 @@ param tags object = {}
 
 param kind string = ''
 param reserved bool = true
-param sku object
+param sku object = {}
 
 resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: name
   location: location
   tags: tags
   sku: {
-      name: 'B1'
+      name: 'F1'
+      tier: 'Free'
+      size: 'F1'
+      family: 'F'
+      capacity: 1
     }
   kind: kind
   properties: {
