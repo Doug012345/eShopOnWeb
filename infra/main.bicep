@@ -126,10 +126,10 @@ module appServicePlan './core/host/appserviceplan.bicep' = {
     location: location
     tags: tags
     sku: {
-      name: 'F1'
-      tier: 'Free'
-      size: 'f1'
-      family: 'F'
+      name: 'S1'
+      tier: 'Standard'
+      size: 'S1'
+      family: 'S'
       capacity: 1
     }
   }

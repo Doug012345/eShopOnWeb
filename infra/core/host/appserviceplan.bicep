@@ -11,10 +11,10 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2022-03-01' = {
   location: location
   tags: tags
   sku: {
-      name: 'F1'
-      tier: 'Free'
-      size: 'F1'
-      family: 'F'
+      name: 'S1'
+      tier: 'Standard'
+      size: 'S1'
+      family: 'S'
       capacity: 1
     }
   kind: kind

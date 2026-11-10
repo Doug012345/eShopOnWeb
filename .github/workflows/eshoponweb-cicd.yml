@@ -63,7 +63,7 @@ jobs:
           subscriptionId: ${{ env.SUBSCRIPTION-ID }}
           resourceGroupName: ${{ env.RESOURCE-GROUP }}
           template: ${{ env.TEMPLATE-FILE }}
-          parameters: "webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }} sku=F1"
+          parameters: "webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }} sku=S1"
           failOnStdErr: false
 
       - name: Publish Website to WebApp using CLI
