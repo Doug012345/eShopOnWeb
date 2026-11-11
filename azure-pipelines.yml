@@ -1,4 +1,3 @@
-$yamlContent = @"
 trigger:
 - main
 
@@ -32,6 +31,3 @@ stages:
         tags: |
           latest
           $(tag)
-"@
-
-Set-Content -Path "azure-pipelines.yml" -Value $yamlContent
