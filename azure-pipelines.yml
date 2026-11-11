@@ -28,6 +28,7 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        buildContext: '$(Build.SourcesDirectory)'
         tags: |
           latest
           $(tag)
