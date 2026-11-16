@@ -1,8 +1,16 @@
-version: incoming
-testId: 'eshoponweb-load-test'
-testDescription: 'Test de charge automatisé pour eShopOnWeb'
-testPlan: 'tests/votre-script-de-test.jmx' # Remplacez par le nom réel de votre fichier de test s'il existe
+displayName: eshoponweb-url-test
+testPlan: url_test.json
+description: test
 engineInstances: 1
-failureCriteria:
-  - Latency > 500ms
-  - ErrorRate > 1
+testId: 5f005f04-53ea-450c-9751-aded5e84002e
+testType: URL
+splitAllCSVs: False
+referenceIdentities:
+- kind: KeyVault
+  type: SystemAssigned
+- kind: Metrics
+  type: SystemAssigned
+autoStop:
+  errorPercentage: 90
+  timeWindow: 60
+  maximumVirtualUsersPerEngine: 5000
