@@ -32,3 +32,20 @@ stages:
         tags: |
           latest
           $(tag)
+- stage: LoadTest
+  displayName: 'Azure Load Test Stage'
+  dependsOn: Build
+  jobs:
+  - job: RunLoadTest
+    displayName: 'Run Load Test'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - checkout: self
+    - task: AzureLoadTest@1
+      inputs:
+        azureSubscription: '$(azureServiceConnection)'
+        loadTestConfigFile: 'config.yaml'
+        resourceGroup: 'rg-loadtest'
+        loadTestResource: 'alt-loadtest-01'
+      displayName: 'Exécuter le test de charge Azure'

@@ -1,0 +1,8 @@
+version: incoming
+testId: 'eshoponweb-load-test'
+testDescription: 'Test de charge automatisé pour eShopOnWeb'
+testPlan: 'tests/votre-script-de-test.jmx' # Remplacez par le nom réel de votre fichier de test s'il existe
+engineInstances: 1
+failureCriteria:
+  - Latency > 500ms
+  - ErrorRate > 1
