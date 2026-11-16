@@ -47,5 +47,5 @@ stages:
         azureSubscription: '$(azureServiceConnection)'
         loadTestConfigFile: 'config.yaml'
         resourceGroup: 'rg-loadtest'
-        loadTestResource: 'alt-loadtest-01'
+        loadTestResource: 'alt-loadtest-001'
       displayName: 'Exécuter le test de charge Azure'
